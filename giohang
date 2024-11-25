@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng</title>
+    <style>
+     
+      
+        .main-header {
+            background-color: #ff6a3c;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-left,
+        .header-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .header-left a,
+        .header-right a {
+            text-decoration: none;
+            color: #faf5f5;
+        }
+
+        .header-left a:hover,
+        .header-right a:hover {
+            color: #0f0f0f;
+        }
+
+        .language-dropdown {
+            position: relative;
+        }
+
+        .language-dropdown button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .language-dropdown ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            list-style: none;
+            padding: 5px 0;
+            border: 1px solid #ddd;
+            width: 120px;
+            text-align: left;
+        }
+
+        .language-dropdown:hover ul {
+            display: block;
+        }
+
+        .language-dropdown ul li {
+            padding: 8px 15px;
+        }
+
+        .language-dropdown ul li:hover {
+            background-color: #f5f5f5;
+        }
+
+        .language-dropdown ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .language-dropdown ul li a:hover {
+            color: #ff5722;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #ff5722;
+            color: white;
+        }
+
+        td {
+            border-bottom: 1px solid #ddd;
+        }
+
+        button {
+            background-color: #ff5722;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #000000;
+        }
+
+        .cart-summary {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        button.quantity-btn {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        button.quantity-btn:hover {
+            background-color: #e9e9e9;
+        }
+
+        span.quantity {
+            padding: 0 10px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .social-media {
+            margin-bottom: 20px;
+        }
+
+        .social-media p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .social-icon {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
+
+        .social-icon:hover {
+            color: #ffcc00;
+        }
+
+        .facebook-icon::before {
+            margin-right: 5px;
+        }
+
+        .instagram-icon::before {
+
+            margin-right: 5px;
+        }
+
+
+        .social-icon:hover {
+            color: #ff7d13;
+        }
+
+        .copyright {
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <img src="Capture.PNG" alt="Shopee Logo">
+        </div>
+        <div class="header-left">
+            <a href="#">Kênh người bán</a>
+            <a href="#">Tải ứng dụng</a>
+            <a href="#">Kết nối</a>
+        </div>
+        
+        <div class="header-right">
+            <a href="#">Thông báo</a>
+            <a href="#">Hỗ trợ</a>
+            <div class="language-dropdown">
+                <button>Tiếng Việt</button>
+                <ul>
+                    <li><a href="#">English</a></li>
+                    <li><a href="#">Tiếng Việt</a></li>
+                </ul>
+            </div>
+            <a href="#">Tài khoản</a>
+        </div>
+    </header>
+    <div class="cart-container">
+        <h1>Giỏ hàng của bạn</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Chọn</th>
+                    <th>Sản Phẩm</th>
+                    <th>Đơn Giá (₫)</th>
+                    <th>Số Lượng</th>
+                    <th>Số Tiền (₫)</th>
+                    <th>Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- Các sản phẩm sẽ được thêm vào đây -->
+            </tbody>
+        </table>
+
+        <div class="cart-summary">
+            <h2>Tóm tắt giỏ hàng</h2>
+            <p>Tổng số sản phẩm: <span id="total-items">0</span></p>
+            <p>Tổng số tiền: <span id="total-price">0.00</span> ₫</p>
+            <button id="checkout-button">Thanh toán</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [
+            { id: 1, name: 'Sản phẩm 1', price: 100000, quantity: 1, selected: false },
+            { id: 2, name: 'Sản phẩm 2', price: 150000, quantity: 2, selected: false },
+        ];
+
+        function renderCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = ''; 
+
+            let totalItems = 0;
+            let totalPrice = 0;
+
+            cart.forEach(item => {
+                const itemTotalPrice = item.price * item.quantity;
+
+                
+                if (item.selected) {
+                    totalItems += item.quantity;
+                    totalPrice += itemTotalPrice;
+                }
+
+                cartItems.innerHTML += `
+            <tr>
+                <td><input type="checkbox" onchange="toggleSelect(${item.id})" ${item.selected ? 'checked' : ''}></td>
+                <td>${item.name}</td>
+                <td>${item.price.toLocaleString('vi-VN')}</td>
+                <td>
+                    <button class="quantity-btn" onclick="decreaseQuantity(${item.id})">-</button>
+                    <span id="quantity-${item.id}" class="quantity">${item.quantity}</span>
+                    <button class="quantity-btn" onclick="increaseQuantity(${item.id})">+</button>
+                </td>
+                <td>${itemTotalPrice.toLocaleString('vi-VN')} ₫</td>
+                <td><button onclick="removeItem(${item.id})">Xóa</button></td>
+            </tr>
+        `;
+            });
+
+            document.getElementById('total-items').textContent = totalItems;
+            document.getElementById('total-price').textContent = totalPrice.toLocaleString('vi-VN');
+        }
+
+        
+        function toggleSelect(id) {
+            const item = cart.find(product => product.id === id);
+            if (item) {
+                item.selected = !item.selected; 
+                renderCart();
+            }
+        }
+
+        function increaseQuantity(id) {
+            const item = cart.find(product => product.id === id);
+            if (item) {
+                item.quantity += 1;
+                renderCart();
+            }
+        }
+
+        function decreaseQuantity(id) {
+            const item = cart.find(product => product.id === id);
+            if (item && item.quantity > 1) {
+                item.quantity -= 1;
+                renderCart();
+            }
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            renderCart();
+        }
+
+        document.getElementById('checkout-button').addEventListener('click', () => {
+            const selectedItems = cart.filter(item => item.selected);
+            if (selectedItems.length > 0) {
+                alert('Tiến hành thanh toán cho các sản phẩm đã chọn');
+            } else {
+                alert('Bạn chưa chọn sản phẩm nào!');
+            }
+        });
+
+        renderCart();
+
+    </script>
+</body>
+
+</html>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">Chính sách bảo mật</a>
+            <a href="#">Điều khoản dịch vụ</a>
+            <a href="#">Liên hệ</a>
+            <a href="#">Câu hỏi thường gặp</a>
+        </div>
+
+        <div class="social-media">
+            <p>Theo dõi Shopee:</p>
+            <a href="#" class="social-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+                </svg> Facebook</a>
+            <a href="#" class="social-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                    <path
+                        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+                </svg> Instagram</a>
+
+
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2024 Shopee. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+
+</html>
